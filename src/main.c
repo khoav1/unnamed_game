@@ -12,7 +12,8 @@ typedef struct {
 } AppState;
 
 SDL_AppResult log_err_and_fail(char *msg) {
-    SDL_LogError(SDL_LOG_CATEGORY_ERROR, strcat(msg, "\n%s"), SDL_GetError());
+    SDL_strlcat(msg, "\n%s", sizeof(msg));
+    SDL_LogError(SDL_LOG_CATEGORY_ERROR, msg, SDL_GetError());
     return SDL_APP_FAILURE;
 }
 
